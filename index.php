@@ -25,7 +25,6 @@ $stmt = $pdo->query('SELECT * FROM books')
 <ul>
     <?php
 while($row = $stmt->fetch()) {
-   var_dump
 ?>
    <li>
         <a href="book.php">

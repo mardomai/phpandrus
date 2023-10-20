@@ -1,19 +1,50 @@
 <?php
 
+require_once('connect.php');
+
 $id = $_GET['id'];
 
-// echo $id;
+$stmt = $pdo->prepare('SELECT * FROM books WHERE id = :id');
+$stmt->execute(['id' => $id]);
+$book = $stmt->fetch();
 
-$sql = "SELECT * FROM books WHERE id = {$ID}";
+$stmt = $pdo->prepare('SELECT * FROM book_authors ba LEFT JOIN authors a ON ba.author_id=a.id WHERE book_id = :id');
+$stmt->execute(['id' => $id ]);
 
-$stmt = $pdo->prepare('SELECT * FROM users WHERE email = ? AND status=?');
-$stmt->execute([$email, $status]);
-$user = $stmt->fetch();
+?>
 
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-$options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES   => false,
-];
-$pdo = new PDO($dsn, $user, $pass, $options);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1><?= $book['title'] ?></h1>
+    <span style="font-size: 18px;">Aasta</span> <span style="font-size: 32px">1988</span>
+    <br><br>
+    <span style></span>
+
+    <ul>
+        <?php
+        while ($row = $stmt->fetch()) {
+        ?>
+
+
+            <li>
+                <?=$row['first_name']?><?$row['last_name']; ?>
+        </a>
+            </li>
+
+<?php
+        }
+?>
+    </ul>
+
+        <a href="edit.php?id=<?">Muuda</a>
+
+    <a href="./edit.php">Muuda</a>
+
+</body>
+</html>
