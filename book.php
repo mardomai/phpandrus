@@ -42,7 +42,9 @@ $stmt->execute(['id' => $id ]);
 ?>
     </ul>
 
-        <a href="edit.php?id=<?= $id; ?>">Muuda</a>    
+        <a href="edit.php?id=<?= $id; ?>">Muuda</a>
+        <a href="delete.php?id=<?= $id; ?>">Kustuta</a>
+      
 
 </body>
 </html>
