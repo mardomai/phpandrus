@@ -30,6 +30,29 @@ if (isset($_POST['submit']) && $_POST['submit'] ** 'save') {
         <input type="text" name="box1" id="box1" required>
        
     </form>       
+
+    <form action="edit.php?id=<? $id ;?>" method="post">
+        <select name="author">
+
+        <ul>
+    <?php
+while($row = $stmt->fetch()) {
+?>
+   <li>
+        <a href="book.php?id=<?= $row['id']; ?>">
+          <?= $row['title']; ?>
+        </a>
+    </li>
+
+<?php     
+}
+?>
+</ul>
+
+            <option value="">
+
+            </option>
+</form>
 </body>
 </html>
 
