@@ -25,28 +25,30 @@ if (isset($_POST['submit']) && $_POST['submit'] ** 'save') {
     <title>Muuda</title>
 </head>
 <body>
-<form method="post" action="edit.php?id=<?= $id; ?>">
-        <label for="box1">Pealkiri:</label>
-        <input type="text" name="box1" id="box1" required>
-       
-    </form>       
-
-    <form action="edit.php?id=<? $id ;?>" method="post">
-        <select name="author">
 
         <ul>
-    <?php
-while($row = $stmt->fetch()) {
-?>
-   <li>
-        <a href="book.php?id=<?= $row['id']; ?>">
-          <?= $row['title']; ?>
-        </a>
-    </li>
+   
+        <h1>Edit author</h1>
+    <form method="POST">
+        <label for="title">Title:</label>
+        <input type="text" name="title" value="<?= $book["title"]; ?>"><br><br>
+        <label for="release_date">Release Date:</label>
+        <input type="text" name="release_date" value="<?= $book["release_date"]; ?>"><br><br>
 
-<?php     
-}
-?>
+        <label for="price">Price:</label>
+        <input type="text" name="price" value="<?= number_format($book["price"], 2); ?>"><br><br>
+
+        <label for="author_id">Author:</label>
+        <select name="author_id">
+            <?php foreach ($authors as $author): ?>
+                <option value="<?= $author['id']; ?>" <?= $author['id'] == $book['author_id'] ? 'selected' : ''; ?>>
+                    <?= $author['name']; ?>
+                </option>
+            <?php endforeach; ?>
+        </select><br><br>
+
+        <input type="submit" value="Save">
+    </form> 
 </ul>
 
             <option value="">
